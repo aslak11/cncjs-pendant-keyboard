@@ -352,10 +352,10 @@ var createServer = function (options) {
         "write",
         options.port,
         "G00 " +
-          axis +
-          (direction == "left" || direction == "down" ? "-" : "") +
-          move +
-          "\n"
+        axis +
+        (direction == "left" || direction == "down" ? "-" : "") +
+        move +
+        "\n"
       );
       socket.emit("write", options.port, "G90\n");
     }
@@ -387,7 +387,7 @@ var createServer = function (options) {
         socket.emit("write", options.port, cmd + "\n", (data) => {
           console.log(data); // data will be 'woot'
         });
-       
+
       });
     }
   });
@@ -398,11 +398,11 @@ if (options.port) {
   return;
 }
 
-serialport.list(function (err, ports) {
-  if (err) {
-    console.error(err);
-    process.exit(1);
-  }
+serialport.list().then(function (ports) {
+  // if (err) {
+  //   console.error(err);
+  //   process.exit(1);
+  // }
   const choices = ports.map(function (port) {
     return port.comName;
   });
@@ -421,4 +421,9 @@ serialport.list(function (err, ports) {
 
       createServer(options);
     });
+}).catch(function (err) {
+  if (err) {
+    console.error(err);
+    process.exit(1);
+  }
 });
