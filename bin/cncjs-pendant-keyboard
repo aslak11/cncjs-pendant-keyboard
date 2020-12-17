@@ -135,15 +135,14 @@ var createServer = function (options) {
 
     const findPath = (interface) => {
       var d = hid
-        .devices()
-        .find(
-          (item) =>
-            item.vendorId === 6551 &&
-            item.productId === 9267 &&
-            item.interface === interface
-        );
-        console.log(d);
-        return d.path;
+        .devices();
+      console.log(d);
+      return d.find(
+        (item) =>
+          item.vendorId === 6551 &&
+          item.productId === 9267 &&
+          item.interface === interface
+      ).path;
     }
 
     console.log("Keyboard HID Address:", findPath(0), " & ", findPath(1));
