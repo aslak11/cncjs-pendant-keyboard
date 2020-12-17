@@ -29,7 +29,7 @@ module.exports = function(options, callback) {
     options.accessTokenLifetime = get(options, 'accessTokenLifetime', '30d');
 
     if (!options.secret) {
-        const cncrc = path.resolve(getUserHome(), '.cncrc');
+        const cncrc = path.resolve(getUserHome(), '.cncjs/cncrc.cfg');
         try {
             const config = JSON.parse(fs.readFileSync(cncrc, 'utf8'));
             options.secret = config.secret;
