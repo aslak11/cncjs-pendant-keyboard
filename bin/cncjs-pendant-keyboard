@@ -133,15 +133,18 @@ var createServer = function (options) {
       store.sender.status = data;
     });
 
-    const findPath = (interface) =>
-      hid
+    const findPath = (interface) => {
+      var d = hid
         .devices()
         .find(
           (item) =>
             item.vendorId === 6551 &&
             item.productId === 9267 &&
             item.interface === interface
-        ).path;
+        );
+        console.log(d);
+        return d.path;
+    }
 
     console.log("Keyboard HID Address:", findPath(0), " & ", findPath(1));
     var keyboard_main = new hid.HID(findPath(0));
