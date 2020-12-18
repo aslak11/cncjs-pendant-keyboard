@@ -18,6 +18,7 @@ var gcodeFolder = path.join(__dirname, "../gcode");
 
 const PLATE_THICKNESS = 5;
 
+
 program
   .version(pkg.version)
   .usage("-s <secret> -p <port> [options]")
@@ -139,12 +140,12 @@ var createServer = function (options) {
       console.log(d);
       return d.find(
         (item) =>
-          item.vendorId === 6551 &&
-          item.productId === 9267 &&
+          item.vendorId === 5649 &&
+          item.productId === 10240 &&
           item.interface === interface
       ).path;
     }
-
+    
     console.log("Keyboard HID Address:", findPath(0), " & ", findPath(1));
     var keyboard_main = new hid.HID(findPath(0));
     var keyboard_extra = new hid.HID(findPath(1));
